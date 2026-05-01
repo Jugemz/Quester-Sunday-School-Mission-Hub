@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Quester Sunday School Hub</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Curriculum weeks">
+        <div class="brand">
+          <img src="assets/logo/logo-main.png" alt="The Quester">
+          <div>
+            <p class="eyebrow">Sunday School</p>
+            <h1>Mission Hub</h1>
+          </div>
+        </div>
+
+        <label class="search-label" for="weekSearch">Find a quest</label>
+        <input id="weekSearch" class="search" type="search" placeholder="Search week, verse, topic">
+
+        <nav id="weekNav" class="week-nav"></nav>
+      </aside>
+
+      <main class="workspace">
+        <section class="topbar" aria-label="Global resources">
+          <a href="docs/Quester_13_Week_Sunday_School_Curriculum.md" target="_blank">Curriculum Draft</a>
+          <a id="fullLeaderGuidePdf" href="pdf/Quester_SundaySchool_Weekly_Lessons_Full_Collection.pdf" target="_blank" data-coming-soon="true">Full Weekly Lessons PDF</a>
+          <a href="https://jugemz.github.io/quester-demo/" target="_blank" rel="noreferrer">Digital Quest</a>
+          <a href="https://www.youtube.com/thequester" target="_blank" rel="noreferrer">YouTube Channel</a>
+          <label class="print-toggle" for="printerFriendlyToggle">
+            <input id="printerFriendlyToggle" type="checkbox">
+            Printer Friendly
+          </label>
+        </section>
+
+        <section class="hero-panel">
+          <div class="hero-copy">
+            <p id="weekKicker" class="eyebrow"></p>
+            <h2 id="weekTitle"></h2>
+            <p id="weekQuestion" class="big-question"></p>
+            <p id="weekDiscovery" class="discovery"></p>
+          </div>
+          <div class="map-frame">
+            <img id="weekImage" alt="">
+          </div>
+        </section>
+
+        <section class="lesson-grid">
+          <article class="panel summary-panel">
+            <div class="panel-heading">
+              <p class="eyebrow">Leader Snapshot</p>
+              <h3>Bible and Big Idea</h3>
+            </div>
+            <dl class="snapshot">
+              <div>
+                <dt>Bible Focus</dt>
+                <dd id="bibleFocus"></dd>
+              </div>
+              <div>
+                <dt>Remember-Me Verse</dt>
+                <dd id="memoryVerse"></dd>
+              </div>
+              <div>
+                <dt>Leader Focus</dt>
+                <dd id="leaderFocus"></dd>
+              </div>
+            </dl>
+          </article>
+
+          <article class="panel">
+            <div class="panel-heading">
+              <p class="eyebrow">Class Flow</p>
+              <h3>Sunday Plan</h3>
+            </div>
+            <ol id="lessonFlow" class="flow-list"></ol>
+          </article>
+
+          <article class="panel media-panel">
+            <div class="panel-heading">
+              <p class="eyebrow">Media Launcher</p>
+              <h3>Songs and Clips</h3>
+            </div>
+            <div id="mediaList" class="media-list"></div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-heading">
+              <p class="eyebrow">Quest Tools</p>
+              <h3>Resources</h3>
+            </div>
+            <div id="resourceList" class="resource-list"></div>
+          </article>
+
+          <article class="panel wide-panel">
+            <div class="panel-heading">
+              <p class="eyebrow">Teacher Notes</p>
+              <h3>Activity and Take-Home</h3>
+            </div>
+            <div class="notes">
+              <div>
+                <h4>Quest Activity</h4>
+                <p id="activityText"></p>
+              </div>
+              <div>
+                <h4>Take-Home Quest</h4>
+                <p id="takeHomeText"></p>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <section class="feedback-panel" aria-labelledby="feedbackTitle">
+          <div>
+            <p class="eyebrow">Trail Notes</p>
+            <h3 id="feedbackTitle">Give Us Your Feedback</h3>
+            <p class="feedback-copy">Tell us what landed, what felt clunky, and what would help your leaders or kids next time.</p>
+          </div>
+          <form id="feedbackForm" class="feedback-form">
+            <label for="feedbackName">Name or church</label>
+            <input id="feedbackName" type="text" placeholder="Optional">
+            <label for="feedbackMessage">Feedback</label>
+            <textarea id="feedbackMessage" rows="5" placeholder="Week, resource, activity, question, or idea..."></textarea>
+            <div class="feedback-actions">
+              <button id="copyFeedback" class="feedback-button" type="button">Copy Feedback</button>
+              <button id="emailFeedback" class="feedback-button" type="button">Prepare Email</button>
+              <span id="feedbackStatus" class="feedback-status" role="status" aria-live="polite"></span>
+            </div>
+          </form>
+        </section>
+      </main>
+    </div>
+
+    <dialog id="clipDialog" class="clip-dialog">
+      <div class="clip-header">
+        <div>
+          <p class="eyebrow">Time-Gated Clip</p>
+          <h3 id="clipTitle"></h3>
+        </div>
+        <button id="closeClip" class="icon-button" type="button" aria-label="Close clip">×</button>
+      </div>
+      <video id="clipPlayer" controls playsinline></video>
+      <p id="clipMeta" class="clip-meta"></p>
+    </dialog>
+
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Quester Coloring Sheet</title>
+    <link rel="stylesheet" href="puzzles.css">
+    <style>
+      .pdf-panel {
+        display: grid;
+        gap: 14px;
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+      }
+
+      .pdf-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      iframe {
+        width: 100%;
+        min-height: 78vh;
+        border: 1px solid #d8d8d8;
+        border-radius: 6px;
+        background: #fff;
+      }
+
+      @media print {
+        .toolbar,
+        .pdf-actions {
+          display: none;
+        }
+
+        .pdf-panel {
+          padding: 0;
+          border: 0;
+        }
+
+        iframe {
+          min-height: 100vh;
+          border: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="puzzle-shell">
+      <section class="toolbar">
+        <div>
+          <p class="eyebrow">Quester Coloring Sheet</p>
+          <h1 id="coloringTitle">Week Coloring Sheet</h1>
+          <p id="coloringSubtitle">Production PDF for classroom printing.</p>
+        </div>
+        <div class="actions">
+          <label>
+            Week
+            <select id="weekSelect"></select>
+          </label>
+          <a id="pdfLinkTop" class="button-link" target="_blank">Open PDF</a>
+          <a class="button-link" href="index.html">Back to Hub</a>
+        </div>
+      </section>
+
+      <section class="pdf-panel">
+        <div class="pdf-actions">
+          <a id="pdfLink" class="button-link" target="_blank">Open / Print Production PDF</a>
+        </div>
+        <iframe id="pdfFrame" title="Weekly coloring sheet PDF"></iframe>
+      </section>
+    </main>
+    <script>
+      const weekSelect = document.querySelector("#weekSelect");
+      for (let week = 1; week <= 13; week++) {
+        const option = document.createElement("option");
+        option.value = String(week);
+        option.textContent = `Week ${week}`;
+        weekSelect.appendChild(option);
+      }
+
+      const params = new URLSearchParams(window.location.search);
+      const initialWeek = Math.max(1, Math.min(13, Number(params.get("week") || 1)));
+      weekSelect.value = String(initialWeek);
+
+      weekSelect.addEventListener("change", () => renderColoring(Number(weekSelect.value)));
+
+      function renderColoring(week) {
+        const pdf = `pdf/coloring/PDF/Week-${week}.pdf`;
+        document.querySelector("#coloringTitle").textContent = `Week ${week} Coloring Sheet`;
+        document.querySelector("#pdfFrame").src = pdf;
+        document.querySelector("#pdfLink").href = pdf;
+        document.querySelector("#pdfLinkTop").href = pdf;
+      }
+
+      renderColoring(initialWeek);
+    </script>
+  </body>
+</html>

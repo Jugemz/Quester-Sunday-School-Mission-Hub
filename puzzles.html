@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Quester Weekly Puzzle</title>
+    <link rel="stylesheet" href="puzzles.css">
+  </head>
+  <body>
+    <main class="puzzle-shell">
+      <section class="toolbar">
+        <div>
+          <p class="eyebrow">Quester Puzzle Lab</p>
+          <h1 id="pageTitle">Weekly Puzzle</h1>
+          <p id="pageSubtitle"></p>
+        </div>
+        <div class="actions">
+          <label>
+            Week
+            <select id="weekSelect"></select>
+          </label>
+          <label>
+            Puzzle
+            <select id="typeSelect">
+              <option value="word-search">Word Search</option>
+              <option value="scramble">Word Scramble</option>
+              <option value="cryptogram">Cryptogram</option>
+              <option value="icon-code">Icon Code</option>
+            </select>
+          </label>
+          <button id="newPuzzle" type="button">New Puzzle</button>
+          <button id="toggleAnswer" type="button">Show Answer</button>
+          <button id="printPuzzle" type="button">Print</button>
+          <a id="backToHub" class="button-link" href="index.html">Back to Hub</a>
+        </div>
+      </section>
+
+      <section class="canvas-wrap">
+        <canvas id="puzzleCanvas" width="900" height="1100" aria-label="Generated puzzle"></canvas>
+      </section>
+    </main>
+
+    <script src="puzzles.js"></script>
+  </body>
+</html>

@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Quester Weekly Leader Guide</title>
+    <link rel="stylesheet" href="leader.css">
+  </head>
+  <body>
+    <main class="leader-shell">
+      <section class="screen-toolbar">
+        <div>
+          <p class="eyebrow">Provision for the Journey</p>
+          <h1>Weekly Leader Guide</h1>
+        </div>
+        <div class="toolbar-actions">
+          <label>
+            Week
+            <select id="weekSelect"></select>
+          </label>
+          <button id="printGuide" type="button">Print / Save PDF</button>
+          <label class="print-friendly-control" for="printFriendlyGuide">
+            <input id="printFriendlyGuide" type="checkbox">
+            Printer Friendly
+          </label>
+          <a href="index.html">Back to Hub</a>
+        </div>
+      </section>
+
+      <article class="print-page">
+        <header class="guide-header">
+          <div class="guide-title-wrap">
+            <div>
+              <p id="unitLabel" class="eyebrow"></p>
+              <h2 id="guideTitle"></h2>
+            </div>
+            <img id="guideAsset" alt="">
+          </div>
+          <div class="guide-grid">
+            <div>
+              <strong>Destination</strong>
+              <span id="destination"></span>
+            </div>
+            <div>
+              <strong>Visual Cue</strong>
+              <span id="visualCue"></span>
+            </div>
+            <div>
+              <strong>Big Question</strong>
+              <span id="bigQuestion"></span>
+            </div>
+            <div>
+              <strong>Big Discovery</strong>
+              <span id="bigDiscovery"></span>
+            </div>
+            <div>
+              <strong>Remember-Me Verse</strong>
+              <span id="verse"></span>
+            </div>
+          </div>
+        </header>
+
+        <section class="truth-band">
+          <div>
+            <h3>The Big Lie</h3>
+            <p id="bigLie"></p>
+          </div>
+          <div>
+            <h3>The Big Truth</h3>
+            <p id="bigTruth"></p>
+          </div>
+        </section>
+
+        <section class="section-block">
+          <h3>Before Sunday</h3>
+          <p id="prepare"></p>
+          <p><strong>Gather:</strong> <span id="supplies"></span></p>
+        </section>
+
+        <section class="timeline">
+          <div class="time-card">
+            <h3>1. Welcome & Zest Check <span>5 min</span></h3>
+            <p id="welcome"></p>
+          </div>
+          <div class="time-card">
+            <h3>2. The Provision Box <span>8-10 min</span></h3>
+            <p id="starter"></p>
+            <p class="leader-cue"><strong>Leader Cue:</strong> <span id="leaderCue"></span></p>
+          </div>
+          <div class="time-card">
+            <h3>3. Consulting the Map <span>15 min</span></h3>
+            <p id="teaching"></p>
+          </div>
+          <div class="time-card">
+            <h3>4. Campfire Questions <span>8-10 min</span></h3>
+            <ul id="questions"></ul>
+          </div>
+          <div class="time-card">
+            <h3>5. Quest Activity <span>12-15 min</span></h3>
+            <p id="activity"></p>
+          </div>
+          <div class="time-card">
+            <h3>6. Remember-Me Verse <span>5 min</span></h3>
+            <p id="versePractice"></p>
+          </div>
+        </section>
+
+        <section class="mission-hub">
+          <h3>Mission Hub Integration</h3>
+          <ul id="hubTips"></ul>
+        </section>
+
+        <footer class="guide-footer">
+          <p id="close"></p>
+        </footer>
+      </article>
+    </main>
+
+    <script src="leader.js"></script>
+  </body>
+</html>

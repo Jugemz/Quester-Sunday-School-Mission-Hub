@@ -36,3 +36,6 @@ Coloring source sketches such as JPG, PNG, and SVG production files are intentio
 The Digital Quest button links to the existing hosted demo:
 
 `https://jugemz.github.io/quester-demo/`
+
+This repository contains the proprietary Lock & Keystone Engine. Contributions to lesson data are welcome from authorized Quester Community members. For licensing inquiries regarding the core engine for other non-profit projects, please contact **tjt0dd@p0stlinteldesign.com**
+0=o

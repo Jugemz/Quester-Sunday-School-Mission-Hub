@@ -1,21 +1,29 @@
-MIT License
+LICENSE: Lock & Keystone Engine / Sunday School Mission Hub
+Copyright © 2026 Post Lintel Design LLC. All Rights Reserved.
 
-Copyright (c) 2026 Jugemz
+1. THE "ENGINE" (Software Framework)
+The core logic, source code, game engine architecture (go.html, app.js, puzzles.js), PDF generation scripts, and underlying software infrastructure are the sole intellectual property of [Your Name/Business Name] (the "Author").
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+2. THE "CONTENT" (Quester Assets)
+All brand likenesses, character art (The Quester, Sleepy Stickbug, etc.), specific lesson narrative, and theological curriculum content are the intellectual property of The Quester Community.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+3. LIMITED LICENSE GRANT
+The Author hereby grants The Quester Community a non-exclusive, perpetual, royalty-free license to:
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+Host, display, and run the software on their official domains and servers.
+
+Distribute the generated outputs (PDF Journals, Curriculum, Game Lessons) to their community and partners.
+
+Modify lesson data files (topic.js, curriculumData) for the purpose of updating educational content.
+
+4. RESTRICTIONS
+Without express written permission from the Author, third parties (including users of the GitHub repository) are prohibited from:
+
+Redistributing, selling, or sub-licensing the core "Engine" or software framework.
+
+Using the software framework to build competing platforms or commercial products.
+
+Removing copyright notices or "Powered by Lock & Keystone" watermarks.
+
+5. NO WARRANTY
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

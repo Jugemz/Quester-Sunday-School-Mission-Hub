@@ -602,6 +602,14 @@ body.printer-friendly .big-question {
   background: #000;
 }
 
+#youtubePlayer {
+  display: none;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  background: #000;
+}
+
 .clip-meta {
   margin: 0;
   padding: 12px 16px 16px;

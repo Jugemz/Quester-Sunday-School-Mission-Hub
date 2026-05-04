@@ -2,6 +2,22 @@ const youtubeChannel = "https://www.youtube.com/thequester";
 const officialVideoLibrary = "https://www.questercommunity.com/free-kids-videos";
 const digitalQuestDemo = "https://jugemz.github.io/quester-demo/";
 const fullWeeklyLessonsPdf = "pdf/Quester_SundaySchool_Weekly_Lessons_Full_Collection.pdf";
+const bigQuestionsMovieId = "fVoS62cZl7A";
+const bigQuestionsSegments = {
+  1: { start: 52, end: 487 },
+  2: { start: 498, end: 956 },
+  3: { start: 959, end: 1115 },
+  4: { start: 1523, end: 1857 },
+  5: { start: 2588, end: 2783 },
+  6: { start: 2885, end: 3055 },
+  7: { start: 3254, end: 3482 },
+  8: { start: 3543, end: 3663 },
+  9: { start: 3782, end: 3996 },
+  10: { start: 4260, end: 4492 },
+  11: { start: 5024, end: 5139 },
+  12: { start: 5296, end: 5600 },
+  13: { start: 6052, end: 7008 },
+};
 
 const resources = {
   leaderGuide: fullWeeklyLessonsPdf,
@@ -305,6 +321,7 @@ const weekNav = document.querySelector("#weekNav");
 const weekSearch = document.querySelector("#weekSearch");
 const clipDialog = document.querySelector("#clipDialog");
 const clipPlayer = document.querySelector("#clipPlayer");
+const youtubePlayer = document.querySelector("#youtubePlayer");
 const clipTitle = document.querySelector("#clipTitle");
 const clipMeta = document.querySelector("#clipMeta");
 const feedbackName = document.querySelector("#feedbackName");
@@ -385,13 +402,7 @@ function getDestinationImage(week) {
 function renderFlow(week) {
   const flow = document.querySelector("#lessonFlow");
   flow.innerHTML = "";
-  const items = week.flow || [
-    "Welcome Questers and introduce the Big Question.",
-    `Read ${week.biblePassage}.`,
-    "Teach the Big Discovery.",
-    week.activityText,
-    "Practice the Remember-Me verse and pray.",
-  ];
+  const items = buildLessonFlow(week);
   items.forEach((item) => {
     const li = document.createElement("li");
     li.textContent = item;
@@ -399,10 +410,30 @@ function renderFlow(week) {
   });
 }
 
+function buildLessonFlow(week) {
+  const items = [...(week.flow || [
+    "Welcome Questers and introduce the Big Question.",
+    `Read ${week.biblePassage}.`,
+    "Teach the Big Discovery.",
+    week.activityText,
+    "Practice the Remember-Me verse and pray.",
+  ])];
+  const segment = getBigQuestionsSegment(week.week);
+  const movieStep = `Watch the Big Questions Quester Movie clip (${formatTime(segment.start)}-${formatTime(segment.end)}) before reading Scripture.`;
+  const scriptureIndex = items.findIndex((item) => item.toLowerCase().startsWith("read ") || item.includes(week.biblePassage));
+  items.splice(scriptureIndex >= 0 ? scriptureIndex : Math.min(1, items.length), 0, movieStep);
+  return items;
+}
+
 function renderMedia(week) {
   const list = document.querySelector("#mediaList");
   list.innerHTML = "";
-  const items = [...(week.media || []), { type: "official", title: "Official Quester video library", url: officialVideoLibrary }];
+  const segment = getBigQuestionsSegment(week.week);
+  const items = [
+    { type: "youtube-clip", title: `Big Questions Movie Clip: Week ${week.week}`, videoId: bigQuestionsMovieId, start: segment.start, end: segment.end },
+    ...(week.media || []),
+    { type: "official", title: "Official Quester video library", url: officialVideoLibrary },
+  ];
 
   items.forEach((item) => {
     const row = document.createElement("div");
@@ -415,7 +446,14 @@ function renderMedia(week) {
       </div>
     `;
 
-    if (isPlayableClip(item)) {
+    if (item.type === "youtube-clip") {
+      const button = document.createElement("button");
+      button.className = "media-button";
+      button.type = "button";
+      button.textContent = "Play Segment";
+      button.addEventListener("click", () => openYouTubeClip(item));
+      row.appendChild(button);
+    } else if (isPlayableClip(item)) {
       const button = document.createElement("button");
       button.className = "media-button";
       button.type = "button";
@@ -442,6 +480,10 @@ function renderMedia(week) {
 
     list.appendChild(row);
   });
+}
+
+function getBigQuestionsSegment(weekNumber) {
+  return bigQuestionsSegments[weekNumber] || bigQuestionsSegments[1];
 }
 
 function isPlayableClip(item) {
@@ -514,6 +556,7 @@ function markComingSoonPdf(link) {
 }
 
 function getMediaMeta(item) {
+  if (item.type === "youtube-clip") return `Big Questions movie · ${formatTime(item.start)}-${formatTime(item.end)}`;
   if ((item.type === "vbs-clip" || item.type === "local-clip") && !isPlayableClip(item)) {
     return "Video upload needed for time-gated playback";
   }
@@ -524,9 +567,29 @@ function getMediaMeta(item) {
   return "Official Quester site";
 }
 
+function openYouTubeClip(item) {
+  clipTitle.textContent = item.title;
+  clipMeta.textContent = `This plays the Big Questions movie from ${formatTime(item.start)} to ${formatTime(item.end)} and pauses at the stop time.`;
+  clipPlayer.pause();
+  clipPlayer.style.display = "none";
+  clipPlayer.removeAttribute("src");
+  clipPlayer.load();
+  youtubePlayer.style.display = "block";
+  youtubePlayer.src = `https://www.youtube.com/embed/${item.videoId}?start=${item.start}&enablejsapi=1&autoplay=1&rel=0`;
+  clipDialog.showModal();
+  window.clearInterval(openYouTubeClip.stopTimer);
+  openYouTubeClip.stopTimer = window.setInterval(() => {
+    youtubePlayer.contentWindow?.postMessage(JSON.stringify({ event: "command", func: "getCurrentTime", args: [] }), "*");
+  }, 500);
+  openYouTubeClip.activeEnd = item.end;
+}
+
 function openClip(item) {
   clipTitle.textContent = item.title;
   clipMeta.textContent = `This launches ${item.src} from ${formatTime(item.start)} to ${formatTime(item.end)}. Put the VBS video in the hub folder or update the src path in app.js.`;
+  youtubePlayer.style.display = "none";
+  youtubePlayer.removeAttribute("src");
+  clipPlayer.style.display = "block";
   clipPlayer.src = item.src;
   clipPlayer.currentTime = item.start;
   clipDialog.showModal();
@@ -539,6 +602,20 @@ function openClip(item) {
   };
 }
 
+window.addEventListener("message", (event) => {
+  if (typeof event.data !== "string") return;
+  let data;
+  try {
+    data = JSON.parse(event.data);
+  } catch {
+    return;
+  }
+  if (data.info && typeof data.info.currentTime === "number" && data.info.currentTime >= openYouTubeClip.activeEnd) {
+    youtubePlayer.contentWindow?.postMessage(JSON.stringify({ event: "command", func: "pauseVideo", args: [] }), "*");
+    window.clearInterval(openYouTubeClip.stopTimer);
+  }
+});
+
 function formatTime(seconds = 0) {
   const minutes = Math.floor(seconds / 60);
   const secs = String(Math.floor(seconds % 60)).padStart(2, "0");
@@ -547,6 +624,7 @@ function formatTime(seconds = 0) {
 
 document.querySelector("#closeClip").addEventListener("click", () => {
   clipPlayer.pause();
+  window.clearInterval(openYouTubeClip.stopTimer);
   clipDialog.close();
 });
 
@@ -554,6 +632,10 @@ clipDialog.addEventListener("close", () => {
   clipPlayer.pause();
   clipPlayer.removeAttribute("src");
   clipPlayer.load();
+  youtubePlayer.removeAttribute("src");
+  youtubePlayer.style.display = "none";
+  clipPlayer.style.display = "block";
+  window.clearInterval(openYouTubeClip.stopTimer);
 });
 
 function buildFeedbackText() {
